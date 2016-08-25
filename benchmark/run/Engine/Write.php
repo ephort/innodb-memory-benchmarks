@@ -2,14 +2,14 @@
 
 namespace Benchmark\Run;
 
-class Write extends \Benchmark\Base {
+class Write extends \Benchmark\Run\Base {
 
     /**
      * Do random write query
      * 
      * @return boolean
      */
-    public function writeRandom()
+    public function random()
     {
         if (rand() % 2)
             return $this->update();

@@ -7,33 +7,25 @@ class Factory {
     /**
      * Construct requested class
      * 
+     * @param object $db
      * @return \Benchmark\class
      * @throws Exception
      */
-    public static function build() {
+    public static function build(\mysqli $db)
+    {
+        $testType = $_SERVER['argv'][1];
 
-        $engine   = $_SERVER['argv'][1];
-        $testType = $_SERVER['argv'][2];
-        $rows     = $_SERVER['argv'][3];
-
-        $class = 'Benchmark\\' . $engine . '\\' . $testType;
-
-        if (class_exists($class)) {
-            return new $class(self::buildMysql());
+        if ($testType === 'prepare') {
+            $subFactory = 'Benchmark\\Prepare\\Factory';
+        } elseif ($testType === 'run') {
+            $subFactory = 'Benchmark\\Run\\Factory';
         }
 
-        // otherwise we fail
-        throw new Exception('Unsupported format');
-    }
-    
-    /**
-     * Construct MySQLi object
-     * 
-     * @return mysqli
-     */
-    public static function buildMysql()
-    {
-        return new \mysqli($GLOBALS['config']['mysql']['host'], $GLOBALS['config']['mysql']['user'], $GLOBALS['config']['mysql']['pass']);
+        if (class_exists($subFactory)) {
+            return $subFactory::build($db);
+        }
+
+        throw new \Exception('Unsupported test');
     }
     
 }

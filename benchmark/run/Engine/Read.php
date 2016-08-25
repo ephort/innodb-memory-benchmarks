@@ -2,14 +2,14 @@
 
 namespace Benchmark\Run;
 
-class Read extends \Benchmark\Base {
+class Read extends \Benchmark\Run\Base {
     
     /**
      * Do random read query
      * 
      * @return boolean
      */
-    public function readRandom()
+    public function random()
     {
         if (rand() % 2)
             return $this->readSingleRow();
@@ -22,7 +22,7 @@ class Read extends \Benchmark\Base {
      * 
      * @return boolean
      */
-    public function readSingleRow()
+    public function singleRow()
     {
         return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table . ' LIMIT 1 ORDER BY RAND()');
     }
@@ -32,7 +32,7 @@ class Read extends \Benchmark\Base {
      * 
      * @return boolean
      */
-    public function readAllRows()
+    public function allRows()
     {
         return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table);
     }
