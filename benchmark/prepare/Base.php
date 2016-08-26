@@ -20,12 +20,16 @@ class Base extends \Benchmark\Base {
      * Constructor
      * 
      * @param \mysqli $mysqli
+     * @param string $schema
+     * @param string $table
      * @param int $rows
      */
-    public function __construct(\mysqli $mysqli, $rows)
+    public function __construct(\mysqli $mysqli, $schema, $table, $rows)
     {
-        $this->db   = $mysqli;
-        $this->rows = $rows;
+        $this->db       = $mysqli;
+        $this->database = $schema;
+        $this->table    = $table;
+        $this->rows     = $rows;
     }
     
     /**

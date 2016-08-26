@@ -16,10 +16,13 @@ class Factory {
         $engine = $_SERVER['argv'][2];
         $rows   = $_SERVER['argv'][3];
 
+        $schema = $GLOBALS[$engine]['schema'];
+        $table  = $GLOBALS[$engine]['table'];
+        
         $class = 'Benchmark\\Prepare\\' . $engine . '\\Prepare';
 
         if (class_exists($class)) {
-            return new $class($db, $rows);
+            return new $class($db, $schema, $table, $rows);
         }
 
         // otherwise we fail

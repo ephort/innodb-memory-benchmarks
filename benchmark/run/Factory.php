@@ -13,13 +13,17 @@ class Factory {
      */
     public static function build(\mysqli $db)
     {
+        $engine     = $_SERVER['argv'][2];
         $iterations = $_SERVER['argv'][3];
         $test       = $_SERVER['argv'][4];
 
+        $schema = $GLOBALS[$engine]['schema'];
+        $table  = $GLOBALS[$engine]['table'];
+        
         $class = 'Benchmark\\Run\\Engine\\' . ucfirst($test);
 
         if (class_exists($class)) {
-            return new $class($db, $iterations, $test);
+            return new $class($db, $schema, $table, $iterations, $test);
         }
 
         // otherwise we fail
