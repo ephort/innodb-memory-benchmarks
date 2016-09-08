@@ -8,7 +8,8 @@ The purpose of this tool is to validate the results of sysbench.
 ## Installation
 
 1. Check out the project
-2. Set up vendor folder and auto loading
+2. Set up vendor folder and autoloading:
+
 	php composer.phar update
 
 ## Usage
@@ -31,6 +32,7 @@ The purpose of this tool is to validate the results of sysbench.
 ## Test types
 
 The 'run' method accepts different test types.
+
 Each method in Benchmark\Run\Engine is supported:
 
 * mixed random
