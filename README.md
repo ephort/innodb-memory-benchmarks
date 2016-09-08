@@ -3,7 +3,9 @@
 ## About
 
 Benchmark tool of InnoDB and Memory MySQL engines as a PHP CLI.
-The purpose of this tool is to validate the results of sysbench.
+
+The purpose of this tool is to validate the results of other benchmark 
+tools, e.g. sysbench.
 
 ## Installation
 
