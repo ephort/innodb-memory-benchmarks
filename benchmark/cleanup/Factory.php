@@ -1,6 +1,6 @@
 <?php
 
-namespace Benchmark\Prepare;
+namespace Benchmark\Cleanup;
 
 class Factory {
     
@@ -14,15 +14,14 @@ class Factory {
     public static function build(\mysqli $db)
     {
         $engine = $_SERVER['argv'][2];
-        $rows   = $_SERVER['argv'][3];
 
         $schema = \Benchmark\Config::${$engine}['schema'];
         $table  = \Benchmark\Config::${$engine}['table'];
         
-        $class = 'Benchmark\\Prepare\\' . $engine . '\\Prepare';
+        $class = 'Benchmark\\Cleanup\\Tables';
 
         if (class_exists($class)) {
-            return new $class($db, $schema, $table, $rows);
+            return new $class($db, $schema, $table);
         }
 
         // otherwise we fail

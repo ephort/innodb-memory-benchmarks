@@ -1,6 +1,15 @@
 # innodb-memory-benchmarks
 
-Benchmarks of InnoDB vs Memory MySQL engines as a PHP CLI.
+## About
+
+Benchmark tool of InnoDB and Memory MySQL engines as a PHP CLI.
+The purpose of this tool is to validate the results of sysbench.
+
+## Installation
+
+1. Check out the project
+2. Set up vendor folder and auto loading
+	php composer.phar update
 
 ## Usage
 
@@ -13,6 +22,11 @@ Benchmarks of InnoDB vs Memory MySQL engines as a PHP CLI.
 	php benchmark.php prepare memory 100000
 	php benchmark.php run innodb 100000 mixed random
 	php benchmark.php run memory 100000 mixed random
+
+## Clean up
+
+	php benchmark.php cleanup innodb
+	php benchmark.php cleanup memory
 
 ## Test types
 
@@ -27,6 +41,7 @@ Each method in Benchmark\Run\Engine is supported:
 * write update
 * write insert
 
-## Unit tests
+## Remarks
 
-..
+To be able to prepare test tables with a large number of rows, you might need
+to increase the MySQL configuration property 'max_allowed_packet'.

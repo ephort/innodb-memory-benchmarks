@@ -1,6 +1,6 @@
 <?php
 
-namespace Benchmark\Run;
+namespace Benchmark\Run\Engine;
 
 class Read extends \Benchmark\Run\Base {
     
@@ -11,10 +11,10 @@ class Read extends \Benchmark\Run\Base {
      */
     public function random()
     {
-        if (rand() % 2)
-            return $this->readSingleRow();
+        if (mt_rand() % 2)
+            return $this->singleRow();
         else
-            return $this->readAllRows();
+            return $this->allRows();
     }
     
     /**
@@ -24,7 +24,7 @@ class Read extends \Benchmark\Run\Base {
      */
     public function singleRow()
     {
-        return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table . ' LIMIT 1 ORDER BY RAND()');
+        return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table . ' ORDER BY rand() LIMIT 1') or $this->throwException($this->db->error);
     }
     
     /**
@@ -34,7 +34,7 @@ class Read extends \Benchmark\Run\Base {
      */
     public function allRows()
     {
-        return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table);
+        return $this->db->query('SELECT * FROM ' . $this->database . '.' . $this->table) or $this->throwException($this->db->error);
     }
     
 }

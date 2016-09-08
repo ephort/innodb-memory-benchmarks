@@ -1,22 +1,23 @@
 <?php
 
-/**
- * 
- * Config file
- * 
- */
-$config = array(
-    'mysql' => array(
+namespace Benchmark;
+
+class Config {
+    
+    static $mysql = array(
         'host'     => 'localhost',
         'user'     => 'root',
         'pass'     => '',
-    ),
-    'innodb' => array(
+    );
+    
+    static $innodb = array(
         'schema'   => 'benchmark_innodb',
         'table'    => 'test',
-    ),
-    'memory' => array(
+    );
+    
+    static $memory = array(
         'schema'   => 'benchmark_memory',
         'table'    => 'test',
-    ),
-);
+    );
+
+}

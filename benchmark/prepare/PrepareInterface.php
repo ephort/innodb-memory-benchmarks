@@ -7,7 +7,7 @@ namespace Benchmark\Prepare;
  * 
  * @author KJI
  */
-interface Prepare {
+interface PrepareInterface {
     
     /**
      * Create table

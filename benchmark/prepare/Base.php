@@ -40,8 +40,6 @@ class Base extends \Benchmark\Base {
      */
     public function run()
     {
-        $this->rows = $rows;
-        
         $this->create();
         $this->prefill();
     }

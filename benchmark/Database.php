@@ -11,7 +11,7 @@ class Database {
      */
     public static function get()
     {
-        return new \mysqli($GLOBALS['config']['mysql']['host'], $GLOBALS['config']['mysql']['user'], $GLOBALS['config']['mysql']['pass']);
+        return new \mysqli(\Benchmark\Config::$mysql['host'], \Benchmark\Config::$mysql['user'], \Benchmark\Config::$mysql['pass']);
     }
     
 }

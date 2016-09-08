@@ -30,10 +30,26 @@ class Base extends \Benchmark\Base {
         if (!method_exists($this, $this->runType))
             throw new \Exception('Unsupported run type');
 
-        for ($i = 0; $i < $this->iterations; $i++) {
-            $this->$runType();
-        }
+        $start = microtime(true);
+        
+        echo PHP_EOL . PHP_EOL;
+        echo '#######################################################' . PHP_EOL;
+        echo '############### InnoDB-memory benchmark ###############' . PHP_EOL;
+        echo '#######################################################' . PHP_EOL . PHP_EOL;
 
+        echo 'Start: ' . date('Y-m-d H:i:s.u') . PHP_EOL;
+        
+        for ($i = 0; $i < $this->iterations; $i++) {
+            echo "Iteration $i\t\t\t\t\r";
+            $this->{$this->runType}();
+        }
+        
+        echo "\n";
+        
+        echo 'Finished: ' . date('Y-m-d H:i:s.u') . PHP_EOL;
+        echo 'Finished in: ' . (microtime(true) - $start) . ' seconds' . PHP_EOL;
+        echo PHP_EOL . PHP_EOL;
+        
     }
     
 }

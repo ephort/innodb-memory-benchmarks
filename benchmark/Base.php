@@ -33,11 +33,24 @@ class Base {
     /**
      * Constructor
      * 
-     * @param mysqli $mysqli
+     * @param \mysqli $mysqli
+     * @param string $schema
+     * @param string $table
      */
-    public function __construct(\mysqli $mysqli)
+    public function __construct(\mysqli $mysqli, $schema, $table)
     {
-        $this->db = $mysqli;
+        $this->db       = $mysqli;
+        $this->database = $schema;
+        $this->table    = $table;
     }
     
+    /**
+     * Throw exception function
+     * 
+     * @param string $message
+     */
+    public function throwException($message)
+    {
+        throw new \Exception($message);
+    }
 }

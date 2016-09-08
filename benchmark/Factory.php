@@ -15,11 +15,7 @@ class Factory {
     {
         $testType = $_SERVER['argv'][1];
 
-        if ($testType === 'prepare') {
-            $subFactory = 'Benchmark\\Prepare\\Factory';
-        } elseif ($testType === 'run') {
-            $subFactory = 'Benchmark\\Run\\Factory';
-        }
+        $subFactory = 'Benchmark\\' . ucfirst($testType) . '\\Factory';
 
         if (class_exists($subFactory)) {
             return $subFactory::build($db);
