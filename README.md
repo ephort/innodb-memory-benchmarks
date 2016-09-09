@@ -47,5 +47,9 @@ Each method in Benchmark\Run\Engine is supported:
 
 ## Remarks
 
-To be able to prepare test tables with a large number of rows, you might need
-to increase the MySQL configuration property 'max_allowed_packet'.
+To be able to run tests with a large number of rows, you might need to change 
+the following MySQL configuration variables:
+
+* increase 'max_allowed_packet' (the prefill method inserts all rows in one chunk)
+* increase 'max_heap_table_size'
+* increase 'tmp_table_size'
