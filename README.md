@@ -53,3 +53,7 @@ the following MySQL configuration variables:
 * increase 'max_allowed_packet' (the prefill method inserts all rows in one chunk)
 * increase 'max_heap_table_size'
 * increase 'tmp_table_size'
+
+The read tests does not make searches (neither range searches or equality comparisions).
+It picks random rows based on an `ORDER BY rand()` statement. Performance of search
+and indexing is thus not tested using this tool.
