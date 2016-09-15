@@ -20,4 +20,13 @@ class Config {
         'table'    => 'test',
     );
 
+    static $testType;
+    
+    static $engine;
+    
+    static $iterations;
+    
+    static $test;
+    
+    static $runType;
 }

@@ -2,6 +2,8 @@
 
 namespace Benchmark\Run;
 
+use Benchmark\Config;
+
 class Factory {
     
     /**
@@ -13,18 +15,13 @@ class Factory {
      */
     public static function build(\mysqli $db)
     {
-        $engine     = $_SERVER['argv'][2];
-        $iterations = $_SERVER['argv'][3];
-        $test       = $_SERVER['argv'][4];
-        $runType    = $_SERVER['argv'][5];
-
-        $schema = \Benchmark\Config::${$engine}['schema'];
-        $table  = \Benchmark\Config::${$engine}['table'];
+        $schema = Config::${Config::$engine}['schema'];
+        $table  = Config::${Config::$engine}['table'];
         
-        $class = 'Benchmark\\Run\\Engine\\' . ucfirst($test);
+        $class = 'Benchmark\\Run\\Engine\\' . ucfirst(Config::$test);
 
         if (class_exists($class)) {
-            return new $class($db, $schema, $table, $iterations, $runType);
+            return new $class($db, $schema, $table, Config::$iterations, Config::$runType);
         }
 
         // otherwise we fail

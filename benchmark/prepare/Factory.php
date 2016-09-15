@@ -2,6 +2,8 @@
 
 namespace Benchmark\Prepare;
 
+use Benchmark\Config;
+
 class Factory {
     
     /**
@@ -13,13 +15,11 @@ class Factory {
      */
     public static function build(\mysqli $db)
     {
-        $engine = $_SERVER['argv'][2];
-        $rows   = $_SERVER['argv'][3];
-
-        $schema = \Benchmark\Config::${$engine}['schema'];
-        $table  = \Benchmark\Config::${$engine}['table'];
+        $schema = Config::${Config::$engine}['schema'];
+        $table  = Config::${Config::$engine}['table'];
+        $rows   = Config::$iterations;
         
-        $class = 'Benchmark\\Prepare\\' . $engine . '\\Prepare';
+        $class = 'Benchmark\\Prepare\\' . Config::$engine . '\\Prepare';
 
         if (class_exists($class)) {
             return new $class($db, $schema, $table, $rows);

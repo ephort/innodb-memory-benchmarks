@@ -2,6 +2,8 @@
 
 namespace Benchmark\Cleanup;
 
+use Benchmark\Config;
+
 class Factory {
     
     /**
@@ -13,10 +15,8 @@ class Factory {
      */
     public static function build(\mysqli $db)
     {
-        $engine = $_SERVER['argv'][2];
-
-        $schema = \Benchmark\Config::${$engine}['schema'];
-        $table  = \Benchmark\Config::${$engine}['table'];
+        $schema = Config::${Config::$engine}['schema'];
+        $table  = Config::${Config::$engine}['table'];
         
         $class = 'Benchmark\\Cleanup\\Tables';
 
