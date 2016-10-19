@@ -3,11 +3,11 @@
 namespace Benchmark\Prepare;
 
 /**
- * Base class
+ * Prepare class
  *
  * @author KJI
  */
-class Base extends \Benchmark\Base {
+class Prepare extends \Benchmark\Base {
 
     /**
      * Number of rows to prefill

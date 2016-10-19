@@ -19,7 +19,7 @@ class Factory {
         $table  = Config::${Config::$engine}['table'];
         $rows   = Config::$iterations;
 
-        return new \Benchmark\Prepare\Base($db, $schema, $table, $rows, Config::$engine);
+        return new \Benchmark\Prepare\Prepare($db, $schema, $table, $rows, Config::$engine);
     }
 
 }
