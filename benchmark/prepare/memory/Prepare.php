@@ -6,6 +6,9 @@ class Prepare extends \Benchmark\Prepare\Base implements \Benchmark\Prepare\Prep
     
     public function create()
     {
+
+        $this->db->query("CREATE DATABASE IF NOT EXISTS $this->database;") or $this->throwException($this->db->error);
+
         return $this->db->query("CREATE TABLE " . $this->database . "." . $this->table . "
             (
              id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
