@@ -47,20 +47,28 @@ class Prepare extends \Benchmark\Base {
 
     public function create()
     {
+
         $this->db->query("CREATE DATABASE IF NOT EXISTS $this->database;") or $this->throwException($this->db->error);
-        return $this->db->query("CREATE TABLE " . $this->database . "." . $this->table . "
-            (
-             id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+        return $this->db->query(<<<SQL
+            CREATE TABLE $this->database.$this->table
+            (id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
              k INT(10) UNSIGNED NOT NULL DEFAULT 0,
              v char(120) NOT NULL DEFAULT '',
              INDEX USING BTREE (k)
-            ) ENGINE $this->engine") or $this->throwException($this->db->error);
+            ) ENGINE $this->engine
+SQL
+        ) or $this->throwException($this->db->error);
     }
 
     public function prefill()
     {
-        $query = str_repeat("INSERT INTO " . $this->database . "." . $this->table . " (k, v) VALUES(ROUND(rand()*100000), substring(MD5(rand()), 0, 120));", $this->rows);
-        return $this->db->multi_query($query) or $this->throwException($this->db->error);
+        $query = <<<SQL
+            INSERT INTO $this->database.$this->table
+            (k, v) VALUES(ROUND(rand()*100000), substring(MD5(rand()), 0, 120));
+SQL;
+        $repeatedQuery = str_repeat($query, $this->rows);
+        return $this->db->multi_query($repeatedQuery) or $this->throwException($this->db->error);
     }
 
 }
